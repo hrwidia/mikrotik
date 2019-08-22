@@ -1,0 +1,189 @@
+﻿$(if http-status == 302)Hotspot login required$(endif)
+$(if http-header == "Location")$(link-redirect)$(endif)
+<!DOCTYPE html>
+<html lang="id-ID">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="Dukodu wifi login">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <title>Dukodu</title>
+    <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+    <link href="static\plugin\bootstrap\css\bootstrap.min.css" rel="stylesheet" media="screen, projection">
+    <link href="static\plugin\font-awesome\css\fontawesome-all.min.css" rel="stylesheet">
+    <link href="static\plugin\et-line\style.css" rel="stylesheet">
+    <link href="static\plugin\themify-icons\themify-icons.css" rel="stylesheet">
+    <link href="static\plugin\owl-carousel\css\owl.carousel.min.css" rel="stylesheet">
+    <link href="static\plugin\magnific\magnific-popup.css" rel="stylesheet">
+    <link href="static\css\style.css" rel="stylesheet">
+    <link href="static\css\color\default.css" rel="stylesheet" id="color_theme">
+    <script src="static\js\jquery-3.2.1.min.js"></script>
+  </head>
+  <body data-spy="scroll" data-target="#navbar" data-offset="98">
+    $(if chap-id)
+    <form name="sendin" action="$(link-login-only)" method="post">
+      <input type="hidden" name="username" />
+      <input type="hidden" name="password" />
+      <input type="hidden" name="dst" value="$(link-orig)" />
+      <input type="hidden" name="popup" value="true" />
+    </form>
+    <script type="text/javascript" src="/md5.js"></script>
+    <script type="text/javascript">
+        function doLogin() {
+            document.sendin.username.value = document.login.username.value;
+            document.sendin.password.value = hexMD5('$(chap-id)' + document.login.password.value + '$(chap-challenge)');
+            document.sendin.submit();
+            return false;
+        }
+    </script>
+    $(endif)
+    <main>
+      <section id="home" class="home-banner-03 theme-bg bg-effect-box">
+          <div class="bg-effect bg-cover" style="background-image: url(static/img/banner-effect-6.svg);"></div>
+          <div id="particles_effect" class="particles-effect"></div>
+          <!-- container -->
+          <div class="container">
+            <div class="row align-items-center justify-content-center p-100px-tb sm-p-60px-b">
+              <div class="col-lg-5 md-p-30px-tb" style="margin-top: -10rem;">
+                <div><img class="dukodu" src="static\img\dukodu-light.png" title="" alt="logo-dukodu"></div>
+                <h1 class="font-alt white-color">Registration</h1>
+                
+                <div class="subscribe-block">
+                    <div class="card-block py-lg px-md">
+                      <form id="form-registration" name="form-registration" method="POST" autocomplete="off">
+                          <div class="row">
+                            <div class="col-md-12">
+                              <div class="form-group">
+                                <label for="phone" class="form-label">Phone Number</label>
+                                  <div class="md-form-line-wrap">
+                                    <input class="form-control" type="text" name="phone" id="phone" pattern="[+0-9]{0,13}" minlength="12" maxlength="13" required="on" placeholder="Enter your phone number" style="text-align: center;" autocomplete="off" autosave="off" >
+                                  </div>
+                              </div>
+                            </div>
+                            <div class="col-md-12">
+                              <div class="form-group">
+                                <label for="voucher" class="form-label">Email</label>
+                                  <div class="md-form-line-wrap">
+                                    <input class="form-control" type="email" name="email" id="email" minlength="1" maxlength="35" required="on" placeholder="Enter your email active" style="text-align: center;" autocomplete="off" autosave="off" >
+                                  </div>
+                              </div>
+                            </div>
+                            <br/> <br> <br> <br>
+                            <div class="col-md-12">
+                                <button type="submit" class="btn btn-block btn-danger"><span class="btn-elem-wrap"><span class="text" style="color: white">Signup</span></span></button>
+                            </div>
+                          </div>
+                      </form>
+                      <form name="sendin" hidden="true" id="loginForm" action="$(link-login-only)" method="post" $(if chap-id) onSubmit="return doLogin()" $(endif)>
+                          <input type="hidden" name="dst" value="$(link-orig)"/>
+                          <input type="hidden" name="popup" value="true"/>
+                          <input type="hidden" name="username" id="username" required="on" />
+                          <input type="hidden" name="password" id="password" required="on" />
+                          <div class="row">
+                            
+                            <div class="col-md-12">
+                              <div class="form-group">
+                                <label for="voucher" class="form-label">Voucher Code</label>
+                                <div class="md-form-line-wrap">
+                                  <input class="form-control" type="text" name="voucher" onblur="setValue();" onchange="setValue();" id="voucher" pattern="[a-zA-Z0-9\s]{0,10}" minlength="2" maxlength="10" required="on" placeholder="Enter voucher" style="text-align: center;" autocomplete="off" autosave="off" >
+                                </div>
+                              </div>
+                            </div>
+
+                            <div class="col-md-12">
+                              <div class="form-group">
+                                $(if error)
+                                  <p><font style="color: #ffffffe8">Terjadi kesalahan: </font>$(error)</p>
+                                $(endif)
+                              </div>
+                            </div></br>
+
+                            <div class="col-md-12">
+                                <button type="submit" class="btn btn-block btn-danger"><span class="btn-elem-wrap"><span class="text" style="color: white">LOGIN</span></span></button>
+                            </div>
+
+                          </div>
+                      </form>
+                    </div>
+                  <label>Powered by PT. Trans Hybrid Communication</label>
+                </div>
+              </div> 
+                <div class="col-lg-7 text-center p-10px-l">
+                  <img src="static\img\home-banner-7.svg" title="" alt="">
+                </div>
+            </div> 
+          </div>
+          <!-- container -->
+      </section>
+    </main>
+    <script src="static\js\jquery-migrate-3.0.0.min.js"></script>
+    <script src="static\plugin\appear\jquery.appear.js"></script>
+    <script src="static\plugin\bootstrap\js\popper.min.js"></script>
+    <script src="static\plugin\bootstrap\js\bootstrap.js"></script>
+    <script src="static\plugin\particles\particles.min.js"></script>
+    <script src="static\plugin\particles\particles-app.js"></script>
+    <script src="static\js\jquery.parallax-scroll.js"></script>
+    <script src="static\js\custom.js"></script>
+    $(if chap-id)
+    <script type="text/javascript" src="md5.js"></script>
+    <script type="text/javascript">
+        $('#loginForm').submit(function () {
+            var password = $('#password');
+            password.val(hexMD5('$(chap-id)' + password.val() + '$(chap-challenge)'));
+        });
+    </script>
+    $(endif)
+    <script type="text/javascript">
+        $("#form-registration").submit(function(e) {
+            e.preventDefault();
+            var url = "https://wifi-dukodu-api.transhybrid.net.id/",
+                endpoint = "saveUsers",
+                type = "post",
+                dataType = "json",
+                formRegistration = $(this),
+                data = formRegistration.serialize(),
+                formLogin = $("#loginForm");
+                $.ajax({
+                  url: url+endpoint,
+                  data: data,
+                  type: type,
+                  dataType: dataType,
+                  success: function(data){
+                    if (data.status === true) {
+                      console.log('voucher getted');
+                      $("#voucher, #username, #password").prop('readonly', true).val(data.voucher);
+                    }else{
+                      alert('api terkoneksi tapi gagal mengambil voucher');
+                    }
+                  },
+                  error: function(){
+                    alert('failed to connect api');
+                  }
+                });
+                formLogin.prop('hidden', false);
+                formLogin.fadeIn('slow', function() {
+                  formRegistration.prop('hidden', true);
+                });
+        });
+
+        $("#menu-toggle").click(function (e) {
+            e.preventDefault();
+            $("#wrapper").toggleClass("toggled");
+        });
+        document.login.username.focus();
+
+        var username = document.login.username, password = document.login.password, luser = document.getElementById("luser"), lpass = document.getElementById("lpass"); 
+    
+      function setValue(){
+        var voucher  = $("#voucher").val();
+        if (voucher !== "" || voucher !== null) {
+          $("#username").val(voucher);
+          $("#password").val(voucher);  
+        }else{
+          alert("voucher harus di isi");
+        }
+      }
+    </script>
+  </body>
+</html>
